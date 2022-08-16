@@ -1,0 +1,33 @@
+class Solution
+
+//Function to remove a loop in the linked list.
+
+    public static void removeLoop(Node head){
+
+        // code here
+
+        // remove the loop without losing any nodes
+
+        HashSet set=new HashSet();
+
+        Node n=head;
+
+        while(n.next!=null){
+
+            if(set.contains(n.next)){
+
+                n.next=null;
+
+                return;
+
+            }
+
+            set.add(n);
+
+            n=n.next;
+
+        }
+
+    }
+
+}

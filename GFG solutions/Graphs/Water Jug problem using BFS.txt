@@ -1,0 +1,59 @@
+public boolean dfs(int x, int y, int target){
+
+	    if(x+y>target)
+
+	    return false;
+
+	    
+	    //we use a hashmap/hashset for visited as we dont know all possible combinations of values we will be adding in the graph.
+
+	    HashSet visited=new HashSet();
+
+	    Queue q=new Queue();
+
+	    q.push(0);
+
+	    visited.add(0);
+
+	    int arr={x,y,-x,-y};
+
+	    
+	    while(!q.isEmpty()){
+
+	        int node=q.peek();
+
+	        q.remove();
+
+	        
+if(node==target)
+
+	        return 1;
+
+	        
+int node;
+	        for(int i=0;i<arr.length;i++){
+
+	            node=curr+x;
+
+	            if(node==target)
+
+	            return 1;
+
+	            if(node<0 || node>target)
+
+	            continue
+;
+	            if(!set.contains(node)){
+
+	                q.add(node);
+
+	                visited.add(node);
+
+	            }
+
+	            
+	        }
+
+	        return false;
+        
+ }

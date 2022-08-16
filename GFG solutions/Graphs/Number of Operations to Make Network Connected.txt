@@ -1,0 +1,80 @@
+class Solution {
+
+    public int makeConnected(int n, int[][] connections) {
+
+        int m=connections.length;
+
+        
+        if(m<n-1)
+
+            return -1;
+
+        
+        ArrayList<ArrayList<Integer>> list=new ArrayList<>();
+
+        boolean visited[]=new boolean[n+1];
+
+        
+        //making the arrraylist of N length
+
+        for(int i=0;i<n;i++)
+
+            list.add(new ArrayList<>());
+
+        
+        for(int i=0;i<connections.length;i++){
+
+            list.get(connections[i][0]).add(connections[i][1]);
+
+            list.get(connections[i][1]).add(connections[i][0]);
+
+        }
+
+        
+        //component indicates indipendent islands
+
+        //simple dfs call
+
+        int component=0;
+
+        for(int i=0;i<n;i++){
+
+            if(!visited[i]){
+
+                dfs(i,visited,list);
+
+                component++;
+ 
+           }
+
+        }
+
+        return component-1;
+
+    }
+
+    
+    public void dfs(int i, boolean visited[], ArrayList<ArrayList<Integer>> list){
+
+        
+        if(visited[i])
+
+            return;
+
+        
+        visited[i]=true;
+
+        
+        for(int n: list.get(i)){
+
+            if(!visited[n]){
+
+                dfs(n,visited,list);
+
+            }
+
+        }
+
+    }
+
+}
