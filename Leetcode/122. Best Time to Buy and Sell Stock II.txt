@@ -1,0 +1,37 @@
+class Solution {
+    public int maxProfit(int[] prices) {
+       int res=0;
+        int maxprice=0;
+        if(prices.length<2)
+            return 0;
+        int curprice=prices[0];
+        for(int i=0;i<prices.length;i++){
+            if(prices[i]<curprice)
+                curprice=prices[i];
+            else if((i+1<prices.length)&&(prices[i+1]<prices[i])){
+                res=res+prices[i]-curprice;
+                maxprice=0;
+                curprice=prices[i+1];
+            }
+            else{
+                if((prices[i]-curprice)>maxprice)
+                    maxprice=prices[i]-curprice;
+            }
+            
+        }
+            res=res+maxprice;
+        return res;
+    }
+}
+
+OR
+class Solution {
+    public int maxProfit(int[] prices) {
+        int maxprofit = 0;
+        for (int i = 1; i < prices.length; i++) {
+            if (prices[i] > prices[i - 1])
+                maxprofit += prices[i] - prices[i - 1];
+        }
+        return maxprofit;
+    }
+}

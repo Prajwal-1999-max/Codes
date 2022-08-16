@@ -1,0 +1,28 @@
+Iterative approach
+public ListNode reverseList(ListNode head) {
+        ListNode n=head;
+        ListNode h=null;
+        
+        while(n!=null){
+            ListNode node=new ListNode();
+            node.val=n.val;
+            node.next=h;
+            h=node;
+            n=n.next;
+        }
+        return h;
+    }
+
+Recursion method.
+
+public ListNode reverseList(ListNode head) {
+        // Recursive method
+        // base case
+        if (head == null || head.next == null) {
+            return head;
+        }
+        ListNode last = reverseList(head.next);
+        head.next.next = head;
+        head.next = null;
+        return last;
+    }

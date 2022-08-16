@@ -1,0 +1,37 @@
+ArrayList solution
+ public int[] sortedSquares(int[] nums) {
+        ArrayList<Integer> list=new ArrayList<Integer>();
+        for(int i=0;i<nums.length;i++){
+            list.add(nums[i]*nums[i]);
+        }
+        Collections.sort(list);
+        //list.sort();
+        int[] ans=new int[nums.length];
+        int i=0;
+        for( Integer n:list){
+            ans[i]=(int)n;
+            i++;
+        }
+        return ans;
+    }
+}
+
+Better approach 
+public int[] sortedSquares(int[] nums) {
+        int[] op = new int[nums.length];
+        int j= nums.length-1,i=0 ;
+        int k= nums.length-1;
+        while(j>=i){
+            if( nums[i]*nums[i] > nums[j]*nums[j] ){
+                op[k] = nums[i]*nums[i];
+                i++;
+            }
+            else{
+                op[k] = nums[j]*nums[j];
+                j--;
+            }
+            k--;
+        }
+        return op;
+    }
+}

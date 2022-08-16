@@ -1,0 +1,29 @@
+//Simpler approach
+public class Solution {
+    public boolean hasCycle(ListNode head) {
+        ListNode n=head;
+        ArrayList<ListNode> set=new ArrayList<ListNode>();
+        while(n!=null){
+            if(set.contains(n)){
+                return true;
+            }
+            set.add(n);
+            n=n.next;
+        }
+        return false;
+    }
+}
+
+//Faster approach
+public class Solution {
+    public boolean hasCycle(ListNode head) {
+        ListNode slow=head, fast=head;
+        while(fast!=null && fast.next!=null){
+            slow=slow.next;
+            fast=fast.next.next;
+            if(slow==fast)
+                return true;
+        }
+        return false;
+    }
+}

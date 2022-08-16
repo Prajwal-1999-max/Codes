@@ -1,0 +1,51 @@
+//O(NlogN)
+class Solution {
+    public int maximumGap(int[] nums) {
+        if(nums.length<2)
+            return 0;
+       Arrays.sort(nums);
+        int max=Math.abs(nums[0]-nums[1]);
+        for(int i=0;i<nums.length-1;i++){
+            if(Math.abs(nums[i]-nums[i+1])>max)
+                max=Math.abs(nums[i]-nums[i+1]);
+        }
+        return max;
+    }
+}
+
+//O(N)
+class Solution {
+    public int maximumGap(int[] nums) {
+    if(nums.length<2)
+             return 0;
+    int min=nums[0];
+    int max=nums[0];
+    for(int i=0;i<nums.length;i++){
+        min=Math.min(min,nums[i]);
+        max=Math.max(max,nums[i]);
+    }
+        if(min==max)return 0;
+        int bucket =(int)Math.ceil((double)(max-min)/(nums.length-1));
+        int []maxbucket=new int[nums.length];
+        int []minbucket=new int[nums.length];
+        Arrays.fill(maxbucket, Integer.MIN_VALUE);
+        Arrays.fill(minbucket, Integer.MAX_VALUE);
+        
+        for(int i=0;i<nums.length;i++){
+            int index=((nums[i]-min)/bucket);
+            maxbucket[index]=Math.max(nums[i],maxbucket[index]);
+            minbucket[index]=Math.min(nums[i],minbucket[index]);
+        }
+        int prev=min;
+        int ans=0;
+        for(int i=0;i<nums.length;i++){
+            if((minbucket[i]==Integer.MAX_VALUE) || (maxbucket[i]==Integer.MIN_VALUE))
+                continue;
+            ans=Math.max(ans,minbucket[i]-prev);
+            prev=maxbucket[i];
+        }
+
+        return ans;
+        
+    }
+}

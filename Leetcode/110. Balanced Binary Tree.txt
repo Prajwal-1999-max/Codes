@@ -1,0 +1,58 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    public boolean isBalanced(TreeNode root) {
+        if(root==null)
+            return true;
+        Queue<TreeNode> q=new LinkedList<>();
+        q.add(root);
+        while(q.peek()!=null){
+            int left=maxHeight(q.peek().left,0);
+        int right=maxHeight(q.peek().right,0);
+        if(Math.abs(left-right)>1)
+            return false;
+         if(q.peek().left!=null)
+             q.add(q.peek().left);
+        if(q.peek().right!=null)
+             q.add(q.peek().right);
+        q.remove();
+            
+        }
+        
+        return true;
+    }
+    int maxHeight(TreeNode root, int len){
+        if(root==null)
+            return 0;
+        return len+1+Math.max(maxHeight(root.left,len), maxHeight(root.right,len));
+    }
+}
+
+OR
+class Solution {
+    public boolean isBalanced(TreeNode root) {
+        if(root==null)
+            return true;
+        int left=maxHeight(root.left);
+        int right=maxHeight(root.right);
+        return ((Math.abs(left-right)<2) && isBalanced(root.right) && isBalanced(root.left));
+    }
+    int maxHeight(TreeNode root){
+        if(root==null)
+            return 0;
+        return 1+Math.max(maxHeight(root.left), maxHeight(root.right));
+    }
+}

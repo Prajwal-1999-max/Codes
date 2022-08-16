@@ -1,0 +1,51 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    List<Integer> list=new ArrayList<Integer>();
+    public List<Integer> rightSideView(TreeNode root) {
+        // List<Integer> list=new ArrayList<Integer>();
+        // Queue<TreeNode> q=new LinkedList<TreeNode>();
+        // q.add(root);
+        // while(q.peek()!=null){
+        //     int len=q.size();
+        //     TreeNode rightmost=null;
+        //     for(int i=0;i<len;i++){
+        //         rightmost=q.peek();
+        //         if(q.peek().left!=null)
+        //             q.add(q.peek().left);
+        //         if(q.peek().right!=null)
+        //             q.add(q.peek().right);
+        //         q.remove();
+        //     }
+        //     list.add(rightmost.val);
+        // }
+        // return list;
+        
+        int level=0;
+        reversePreOrderTraversal(root,level);
+        return list;
+    }
+    public void reversePreOrderTraversal(TreeNode root,int level){
+        if(root==null)
+            return;
+        
+        if(list.size()==level)
+            list.add(root.val);
+        
+        reversePreOrderTraversal(root.right,level+1);
+        reversePreOrderTraversal(root.left, level+1);
+    }
+}

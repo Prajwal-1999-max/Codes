@@ -1,0 +1,20 @@
+ListNode Head = new ListNode(0);
+    ListNode h1 = l1;
+    ListNode h2 = l2;
+    curr = Head;
+    int carry = 0;
+    while (h1 != null || h2 != null) {
+        int x = (h1 != null) ? h1.val : 0;
+        int y = (h2 != null) ? h2.val : 0;
+        int sum = carry + x + y;
+        carry = sum / 10;
+        curr.next = new ListNode(sum % 10);
+        curr = curr.next;
+        if (h1 != null) h1 = h1.next;
+        if (h2 != null) h2 = h2.next;
+    }
+    if (carry > 0) {
+        curr.next = new ListNode(carry);
+    }
+    return Head.next;
+    }
