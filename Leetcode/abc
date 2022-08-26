@@ -1,0 +1,40 @@
+class Solution {
+    public int minimumDeletions(int[] nums) {
+     if(nums.length==0)
+         return 0;
+    if(nums.length==1)
+        return 1;
+    
+        int max=nums[0];
+        int maxindex=0;
+        int min=nums[0];
+        int minindex=0;
+        int ans=nums.length+1;
+        
+        for(int i=0;i<nums.length;i++){
+            if(nums[i]<min){
+                min=nums[i];
+                minindex=i;
+            }
+            if(nums[i]>max){
+                max=nums[i];
+                maxindex=i;
+            }   
+        }
+        
+//         if((maxind<nums.length/2)&&(minind>nums.length/2))
+//             return Math.min(ans,(maxind+1+(nums.length-minind)));
+//         if((minind<nums.length/2)&&(maxind>nums.length/2))
+//             return Math.min((minind+1+(nums.length-maxind)),ans);
+//         if((maxind<=nums.length/2)&&(minind<=nums.length/2))
+//             return Math.min(ans,Math.max(maxind+1, minind+1));
+//         if((maxind>=nums.length/2)&&(minind>=nums.length/2))
+//             return Math.min(ans,Math.max(nums.length-minind, nums.length-maxind));
+        
+        ans = Math.min(Math.max(minindex,maxindex)+1,ans);
+ans = Math.min(ans,nums.length-Math.min(minindex,maxindex));
+ans = Math.min(ans,Math.min(minindex,maxindex)+1+nums.length-Math.max(minindex,maxindex));
+return ans;
+        
+    }
+}
